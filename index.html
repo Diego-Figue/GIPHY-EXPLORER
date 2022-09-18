@@ -7,14 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/reset.css">
     <link rel="stylesheet" href="CSS/home.css">
+    <script src="JS/main.js"></script>
     <title>😉 GIPHY EXPLORER</title>
 </head>
 
 <body>
-    
+    <div id="idContain" class="contain">
+        <div class="title__contain">
+            <h1 class="text__tittle"><span class="text__tittle-color">GIPHY</span><br>EXPLORE</h1>
+        </div>
+        <div class="form__contain">
+            <input class="input__form" onclick="inputClick()" type="text" name="search" id="inpSearch"
+                placeholder="Search Giphy">
+            <button class="button__form">🔍</button>
+        </div>
+    </div>
 </body>
 
 </html>
