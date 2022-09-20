@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="CSS/reset.css">
     <link rel="stylesheet" href="CSS/home.css">
-    <script src="JS/main.js"></script>
+    <script defer src="JS/main.js"></script>
     <title>😉 GIPHY EXPLORER</title>
 </head>
 
@@ -19,11 +19,17 @@
             <h1 class="text__tittle"><span class="text__tittle-color">GIPHY</span><br>EXPLORE</h1>
         </div>
         <div class="form__contain">
-            <input class="input__form" onclick="inputClick()" type="text" name="search" id="inpSearch"
-                placeholder="Search Giphy">
-            <button onclick="searchWord()" class="button__form">🔍</button>
+            <input class="input__form" type="text" name="search" id="inpSearch" placeholder="Search Giphy">
+            <button onclick="searchGif()" class="button__form">🔍</button>
+        </div>
+        <div id="searchOldDiv" class="contain__searchOld">
+            <h1>Busquedas recietes:</h1>
+        </div>
+        <div id="contentGifs" class="contentG">
+
         </div>
     </div>
+
 </body>
 
 </html>

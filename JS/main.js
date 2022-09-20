@@ -1,55 +1,108 @@
-//funcion para transladar la cabecera
-const inputClick = () => {
-  let contain = document.getElementById("idContain");
-  contain.style.transform = "translateY(-280px)";
-  contain.style.transition = "all .5s ease-in-out";
+const API = "https://api.giphy.com/v1/gifs/";
+const API_KEY = "?api_key=gxl1NFEAMYKBNA4MLrvYo1zXZjYuYDik";
+const ContentGifs = document.getElementById("contentGifs");
+const ContentSearchold = document.getElementById("searchOldDiv");
+const inputValue = document.getElementById("inpSearch");
+
+//template Gifs
+const entryImage = (image) => {
+  return `
+  <div class="contentG__containImg">
+    <div class="contentG__header">
+      <h1 class="contentG_title">${image.title}</h1>
+    </div>
+    <img src="${image.url}" class="contentG__img"/>
+  </div>
+  `;
 };
 
-//funcion para buscar GIPHY
-const searchWord = () =>{
-  const inputValue = document.getElementById("inpSearch").value;
-
-  //CONEXION API
-const API = "api.giphy.com/v1/gifs/trending?api_key=gxl1NFEAMYKBNA4MLrvYo1zXZjYuYDik&limit=20";
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-async function fetchData(urlApi) {
-  const response = await fetch(urlApi, options);
-  const data = await response.json();
-  return data;
-}
-
-(async () => {
+//endpoint trending
+async function trendingGifs() {
   try {
-    const gifs = await fetchData(API);
-    let view = `
-    ${gif.items
-      .map(
-        (gi) => `
-        <div class="group relative">
-            <div
-                class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
-                <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.description}" class="w-full">
-            </div>
-            <div class="mt-4 flex justify-between">
-                <h3 class="text-sm text-gray-700">
-                    <span aria-hidden="true" class="absolute inset-0"></span>
-                    ${video.snippet.title}
-                </h3>
-            </div>
-        </div>
-    `
-      )
-      .slice(0, 4)
-      .join("")}; 
-    `;
-    content.innerHTML = view;
+    let response = await fetch(`${API}trending${API_KEY}&limit=10`);
+    console.log(`This the response of petition `, response);
+    let { data } = await response.json();
+
+    //extraemos el titulo , la url y el user de los gifs
+    let urlImage = data.map((image) => {
+      return {
+        url: image.images.original.webp,
+        title: image.title,
+      };
+    });
+
+    const view = urlImage.map((img) => entryImage(img));
+
+    ContentGifs.innerHTML = view.join(""); //unimos los objetos
   } catch (error) {
     console.log(error);
   }
 }
+
+
+//guardar info local storage
+
+const getItem = () => {
+  return JSON.parse(localStorage.getItem('search'));
+}
+
+const getItemDefault = () => {
+  const response = getItem();
+  const searchDefault = `
+    <p onClick="searchGif()" class="contain__searchOldText">${response.join(" | ")}</p>
+  `
+  ContentSearchold.innerHTML = searchDefault;
+}
+
+const setItem = () => {
+  const responseGetItem = getItem();
+  if (responseGetItem.length == 3) {
+    responseGetItem.pop();
+  }
+  responseGetItem.unshift(inputValue.value);
+  console.log(responseGetItem);
+
+  localStorage.setItem('search', JSON.stringify(responseGetItem));
+
+}
+
+//recuoerar local storatge
+
+
+//endpoint Buscar
+
+async function searchGif() {
+  setItem();
+  getItemDefault();
+
+  if (!inputValue.value) {
+    return trendingGifs();
+  }
+  console.log(inputValue.value);
+
+  try {
+    let response = await fetch(`${API}search${API_KEY}&q=${inputValue.value}&limit=10`);
+    console.log(`This the response of petition SEARCH`, response);
+    let { data } = await response.json();
+
+    if (data.length == 0) {
+      console.log('no found');
+    }
+
+    let search = data.map((image) => {
+      return {
+        url: image.images.original.webp,
+        title: image.title,
+      };
+    });
+    const view = search.map((img) => entryImage(img));
+
+    ContentGifs.innerHTML = view.join("");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//lama la funcion apenas cargue la pagina
+window.addEventListener("load", () => trendingGifs());
+window.addEventListener("load", () => getItemDefault());
