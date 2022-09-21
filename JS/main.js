@@ -15,6 +15,18 @@ const entryImage = (image) => {
   </div>
   `;
 };
+//template GifsOld
+const entryOldSearch = (image) => {
+  return `
+    <p onClick="searchGif()" class="contain__searchOldText">${image}</p>
+  `
+};
+
+//template oldSearch
+
+const oldSearch = (response) => {
+  return response.map((oldS) => entryOldSearch(oldS));
+};
 
 //endpoint trending
 async function trendingGifs() {
@@ -48,10 +60,8 @@ const getItem = () => {
 
 const getItemDefault = () => {
   const response = getItem();
-  const searchDefault = `
-    <p onClick="searchGif()" class="contain__searchOldText">${response.join(" | ")}</p>
-  `
-  ContentSearchold.innerHTML = searchDefault;
+  ContentSearchold.innerHTML = oldSearch(response);
+  ;
 }
 
 const setItem = () => {

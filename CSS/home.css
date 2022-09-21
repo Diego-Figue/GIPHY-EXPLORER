@@ -135,7 +135,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
-    background-color: red;
     width: 100%;
 }
 
@@ -143,8 +142,6 @@ body {
     color: var(--black);
     display: block;
     width: auto;
-    height: 50px;
     background-color: var(--white);
-    border: 1px solid blue;
 
 }
