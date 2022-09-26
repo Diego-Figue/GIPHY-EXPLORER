@@ -15,21 +15,22 @@ body {
     background: var(--black);
 }
 
-.contain {
+.contain__header {
     width: 100%;
-    height: 100vh;
+    background: var(--black);
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
+
 }
 
 .form__contain {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .title__contain {
@@ -89,6 +90,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .contentG__containImg {
@@ -126,22 +128,56 @@ body {
     object-fit: cover;
 }
 
-
 .text__nf {
     color: var(--white);
 }
 
 .contain__searchOld {
+    width: 80%;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    width: 100%;
+    gap: 10px;
+}
+
+.contain__textSearchOld {
+    color: var(--white);
+    font-size: .9rem;
+    font-weight: 300;
 }
 
 .contain__searchOldText {
     color: var(--black);
     display: block;
-    width: auto;
+    width: 50px;
+    height: 20px;
+    line-height: 20px;
     background-color: var(--white);
+    text-align: center;
+    border-radius: 30px;
+    padding: .3rem;
+}
 
+.contain__searchOldText:hover {
+    background: var(--yellow);
+}
+
+.text_null {
+    color: var(--white);
+    font-size: 3rem;
+    text-align: center;
+}
+
+.text_noFound {
+    color: var(--white);
+    font-size: 2rem;
+    text-align: center;
+}
+
+.content__newGifs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: red;
 }

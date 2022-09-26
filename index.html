@@ -9,25 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="CSS/reset.css">
     <link rel="stylesheet" href="CSS/home.css">
-    <script defer src="JS/main.js"></script>
+    <script defer src="main.js" type="module"></script>
     <title>😉 GIPHY EXPLORER</title>
 </head>
 
 <body>
-    <div id="idContain" class="contain">
-        <div class="title__contain">
+    <div class="contain__header">
+        <div id="cotain__logo" class="title__contain">
             <h1 class="text__tittle"><span class="text__tittle-color">GIPHY</span><br>EXPLORE</h1>
         </div>
         <div class="form__contain">
             <input class="input__form" type="text" name="search" id="inpSearch" placeholder="Search Giphy">
-            <button onclick="searchGif()" class="button__form">🔍</button>
+            <button id="btnSearch" class="button__form">🔍</button>
         </div>
+        <h1 class="contain__textSearchOld">Busquedas recietes:</h1>
         <div id="searchOldDiv" class="contain__searchOld">
-            <h1>Busquedas recietes:</h1>
-        </div>
-        <div id="contentGifs" class="contentG">
 
         </div>
+    </div>
+    <div id="contentGifs" class="contentG">
+
     </div>
 
 </body>
